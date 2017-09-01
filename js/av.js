@@ -77,9 +77,9 @@ var refresh = function() {
 		$('#role').text(data['role'] ? data['role'] : '?');
 		$('#people').empty();
 		$.each(data['people'], function(i, name) {
+			var listItem = $('<li>');
+			listItem.text(name + ' ');
 			if (!g_playerName) {
-			    var listItem = $('<li>');
-			    listItem.text(name + ' ');
 			    var claimLink = $('<a/>');
 			    claimLink.attr('href', 'javascript:void;');
 			    claimLink.text('claim player');
@@ -88,8 +88,8 @@ var refresh = function() {
 			        claim(name);
 			    });
 			    listItem.append(claimLink);
-			    $('#people').append(listItem);
 			}
+			$('#people').append(listItem);
 		    });
         
 		$('#sees').empty();
