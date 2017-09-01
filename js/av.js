@@ -77,11 +77,19 @@ var refresh = function() {
 		$('#role').text(data['role'] ? data['role'] : '?');
 		$('#people').empty();
 		$.each(data['people'], function(i, name) {
-			var append = '';
 			if (!g_playerName) {
-			    append = ' <a href="javascript:claim(\'' + name + '\')">claim player</a>';
+			    var listItem = $('<li>');
+			    listItem.text(name + ' ');
+			    var claimLink = $('<a/>');
+			    claimLink.attr('href', 'javascript:void;');
+			    claimLink.text('claim player');
+			    claimLink.click(function (e) {
+			        e.preventDefault();
+			        claim(name);
+			    });
+			    listItem.append(claimLink);
+			    $('#people').append(listItem);
 			}
-			$('#people').append('<li>' + name + append);
 		    });
         
 		$('#sees').empty();
